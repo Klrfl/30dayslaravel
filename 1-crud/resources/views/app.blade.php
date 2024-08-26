@@ -19,23 +19,13 @@
             <p class="leading-relaxed my-2">Kumpulan gitar</p>
         </header>
 
-        <ul class="p-4 list-decimal flex flex-col gap-2">
+        <ul class="p-4 list-decimal flex flex-col gap-2" hx-target="closest li" hx-swap="outerHTML">
             @empty($guitars)
                 <p>Tidak ada gitar di sini.</p>
             @endempty
 
             @foreach ($guitars as $guitar)
-                <li class="px-4 flex justify-between items-center gap-4 even:bg-slate-100">
-                    <span class="">{{ $guitar->name }}</span>
-                    <span>{{ $guitar->model }}</span>
-                    <span>{{ $guitar->type }}</span>
-                    <span class="font-semibold">{{ $guitar->price }}</span>
-                    <button class="ml-auto outline outline-1 outline-blue-300 inline-block btn"
-                        @click="dialogIsVisible = true" hx-get="{{ route('guitars.edit', $guitar->id) }}"
-                        hx-target="#dialog" hx-swap="outerHTML">
-                        Edit
-                    </button>
-                </li>
+                <x-guitar :guitar="$guitar" />
             @endforeach
         </ul>
 

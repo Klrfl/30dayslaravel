@@ -31,4 +31,10 @@ class GuitarController extends Controller
             'open' => false
         ]);
     }
+
+    public function destroy(string $id)
+    {
+        Guitar::destroy($id);
+        return response("", 201);
+    }
 }
