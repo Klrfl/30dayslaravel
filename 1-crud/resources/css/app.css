@@ -6,4 +6,12 @@
     h1 {
         @apply text-4xl;
     }
+
+    .form-control {
+        @apply block w-full px-4 py-2 bg-slate-100 my-2;
+    }
+
+    .btn {
+        @apply px-4 py-2 cursor-pointer select-none;
+    }
 }

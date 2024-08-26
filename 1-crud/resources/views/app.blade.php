@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-        @vite('resources/css/app.css')
-    </head>
-    <body>
-        <main class="max-w-4xl mx-auto px-4">
-            <header class="py-4">
-                <h1>GitarDB</h1>
-                <p class="leading-relaxed my-2">Kumpulan gitar</p>
-            </header>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <ul class="bg-slate-100 p-4 list-decimal flex flex-col gap-2">
-                @empty($guitars)
-                    <p>Tidak ada gitar di sini.</p>
-                @endempty
+    <title>Laravel</title>
+    @vite('resources/css/app.css')
+    <script defer src="https://unpkg.com/htmx.org@2.0.2"></script>
+    <script defer src="https://unpkg.com/@fylgja/alpinejs-dialog/dist/index.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
 
-                @foreach ($guitars as $guitar)
-                <li class="flex justify-between items-center gap-4">
-                    <span class="">{{$guitar->name}}</span>
-                    <span>{{$guitar->model}}</span>
-                    <span>{{$guitar->type}}</span>
-                    <span>{{$guitar->price}}</span>
-                    <span class="ml-auto px-4 py-2 bg-blue-300 inline-block">Edit</span>
+<body>
+    <main class="max-w-4xl mx-auto px-4" x-data="{ dialogIsVisible: false }">
+        <header class="py-4">
+            <h1>GitarDB</h1>
+            <p class="leading-relaxed my-2">Kumpulan gitar</p>
+        </header>
+
+        <ul class="p-4 list-decimal flex flex-col gap-2">
+            @empty($guitars)
+                <p>Tidak ada gitar di sini.</p>
+            @endempty
+
+            @foreach ($guitars as $guitar)
+                <li class="px-4 flex justify-between items-center gap-4 even:bg-slate-100">
+                    <span class="">{{ $guitar->name }}</span>
+                    <span>{{ $guitar->model }}</span>
+                    <span>{{ $guitar->type }}</span>
+                    <span class="font-semibold">{{ $guitar->price }}</span>
+                    <span class="ml-auto outline outline-1 outline-blue-300 inline-block btn"
+                        @click="dialogIsVisible = true">
+                        Edit
+                    </span>
                 </li>
-                @endforeach
-            </ul>
-        </main>
-    </body>
+            @endforeach
+        </ul>
+
+        <x-guitar-edit-form />
+    </main>
+</body>
+
 </html>
