@@ -30,15 +30,16 @@
                     <span>{{ $guitar->model }}</span>
                     <span>{{ $guitar->type }}</span>
                     <span class="font-semibold">{{ $guitar->price }}</span>
-                    <span class="ml-auto outline outline-1 outline-blue-300 inline-block btn"
-                        @click="dialogIsVisible = true">
+                    <button class="ml-auto outline outline-1 outline-blue-300 inline-block btn"
+                        @click="dialogIsVisible = true" hx-get="{{ route('guitars.edit', $guitar->id) }}"
+                        hx-target="#dialog" hx-swap="outerHTML">
                         Edit
-                    </span>
+                    </button>
                 </li>
             @endforeach
         </ul>
 
-        <x-guitar-edit-form />
+        <div id="dialog"></div>
     </main>
 </body>
 
