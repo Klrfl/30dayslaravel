@@ -13,13 +13,11 @@
 </head>
 
 <body>
-    <main class="max-w-4xl mx-auto px-4" x-data="{ dialogIsVisible: false }">
-        <header class="py-4">
+    <main class="max-w-6xl mx-auto px-4 md:grid md:grid-cols-6 gap-4">
+        <header class="py-4 sticky top-0 h-max col-span-6 md:col-span-2">
             <h1>GitarDB</h1>
             <p class="leading-relaxed my-2">Kumpulan gitar</p>
-
-            <form hx-post="{{ route('guitars.store') }}" hx-target="#list tr:has(th)" hx-swap="afterend"
-                class="p-4 bg-slate-200">
+            <form hx-post="{{ route('guitars.store') }}" hx-target="#list" hx-swap="afterbegin" class="p-4 bg-slate-200">
                 @csrf
                 <input type="text" class="form-control" name="name" placeholder="nama" required />
                 <input type="text" class="form-control" name="model" placeholder="model" required />
@@ -27,33 +25,39 @@
                 <input type="text" class="form-control" name="description" placeholder="description" required />
                 <input type="number" class="form-control" name="price" min="0" placeholder="price" required />
 
-                <button class="btn bg-blue-500 text-white">Submit</button>
+                <button class="btn bg-blue-500 text-white">Tambah gitar</button>
             </form>
         </header>
 
-        <table class="p-4 list-decimal w-full" hx-target="closest tr" hx-swap="outerHTML">
-            <tbody id="list">
-                <tr class="text-left">
-                    <th>Nama</th>
-                    <th>Model</th>
-                    <th>Tipe</th>
-                    <th>Harga</th>
-                    <th class="text-right">Aksi</th>
-                </tr>
-
-                @empty($guitars)
-                    <tr>
-                        <td> Tidak ada gitar di sini. </td>
+        <div class="pt-4 pb-12 overflow-auto col-span-6 md:col-span-4">
+            <table class="list-decimal w-full min-w-max" hx-target="closest tr" hx-swap="outerHTML swap:500ms">
+                <thead>
+                    <tr class="text-left">
+                        <th>Nama</th>
+                        <th>Model</th>
+                        <th>Tipe</th>
+                        <th>Harga</th>
+                        <th class="text-right">Aksi</th>
                     </tr>
-                @endempty
 
-                @foreach ($guitars as $guitar)
-                    <x-guitar :guitar="$guitar" />
-                @endforeach
 
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="list">
+                    @empty($guitars)
+                        <tr>
+                            <td> Tidak ada gitar di sini. </td>
+                        </tr>
+                    @endempty
 
+                    @foreach ($guitars as $guitar)
+                        <x-guitar :guitar="$guitar" />
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- this element is for the initial swap -->
         <div id="dialog"></div>
     </main>
 </body>

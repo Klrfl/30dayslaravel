@@ -42,9 +42,9 @@ class GuitarController extends Controller
 
         $newGuitar->saveOrFail();
 
-        return view("components.guitar-edit-form", [
+        return view("components.guitar", [
             'guitar' => $newGuitar,
-            'open' => false
+            'open' => true
         ]);
     }
 

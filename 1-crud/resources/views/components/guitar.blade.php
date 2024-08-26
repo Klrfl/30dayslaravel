@@ -1,4 +1,4 @@
-<tr class="even:bg-slate-100">
+<tr class="even:bg-slate-100" id="guitar-{{ $guitar->id }}">
     <td>{{ $guitar->name }}</td>
     <td>{{ $guitar->model }}</td>
     <td>{{ $guitar->type }}</td>

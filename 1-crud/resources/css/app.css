@@ -14,4 +14,17 @@
     .btn {
         @apply inline-block px-4 py-2 cursor-pointer select-none;
     }
+
+    .htmx-swapping,
+    .htmx-settling {
+        transition: opacity 500ms ease;
+    }
+
+    .htmx-swapping {
+        opacity: 0;
+    }
+
+    .htmx-added {
+        opacity: 1;
+    }
 }
