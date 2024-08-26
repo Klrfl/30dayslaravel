@@ -17,17 +17,42 @@
         <header class="py-4">
             <h1>GitarDB</h1>
             <p class="leading-relaxed my-2">Kumpulan gitar</p>
+
+            <form hx-post="{{ route('guitars.store') }}" hx-target="#list tr:has(th)" hx-swap="afterend"
+                class="p-4 bg-slate-200">
+                @csrf
+                <input type="text" class="form-control" name="name" placeholder="nama" required />
+                <input type="text" class="form-control" name="model" placeholder="model" required />
+                <input type="text" class="form-control" name="type" placeholder="type" required />
+                <input type="text" class="form-control" name="description" placeholder="description" required />
+                <input type="number" class="form-control" name="price" min="0" placeholder="price" required />
+
+                <button class="btn bg-blue-500 text-white">Submit</button>
+            </form>
         </header>
 
-        <ul class="p-4 list-decimal flex flex-col gap-2" hx-target="closest li" hx-swap="outerHTML">
-            @empty($guitars)
-                <p>Tidak ada gitar di sini.</p>
-            @endempty
+        <table class="p-4 list-decimal w-full" hx-target="closest tr" hx-swap="outerHTML">
+            <tbody id="list">
+                <tr class="text-left">
+                    <th>Nama</th>
+                    <th>Model</th>
+                    <th>Tipe</th>
+                    <th>Harga</th>
+                    <th class="">Aksi</th>
+                </tr>
 
-            @foreach ($guitars as $guitar)
-                <x-guitar :guitar="$guitar" />
-            @endforeach
-        </ul>
+                @empty($guitars)
+                    <tr>
+                        <td> Tidak ada gitar di sini. </td>
+                    </tr>
+                @endempty
+
+                @foreach ($guitars as $guitar)
+                    <x-guitar :guitar="$guitar" />
+                @endforeach
+
+            </tbody>
+        </table>
 
         <div id="dialog"></div>
     </main>

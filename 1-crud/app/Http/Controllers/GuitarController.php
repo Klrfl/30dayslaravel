@@ -7,6 +7,22 @@ use Illuminate\Http\Request;
 
 class GuitarController extends Controller
 {
+    public function store(Request $request)
+    {
+        $input = $request->all();
+
+        $newGuitar = new Guitar();
+        $newGuitar->name = $input['name'];
+        $newGuitar->type = $input['type'];
+        $newGuitar->model = $input['model'];
+        $newGuitar->description = $input['description'];
+        $newGuitar->price = $input['price'];
+
+        $newGuitar->saveOrFail();
+
+        return view('components.guitar', ['guitar' => $newGuitar]);
+    }
+
     public function edit(string $id)
     {
         $guitar = Guitar::find($id);
