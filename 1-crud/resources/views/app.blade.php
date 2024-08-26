@@ -38,7 +38,7 @@
                     <th>Model</th>
                     <th>Tipe</th>
                     <th>Harga</th>
-                    <th class="">Aksi</th>
+                    <th class="text-right">Aksi</th>
                 </tr>
 
                 @empty($guitars)
