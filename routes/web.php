@@ -1,13 +1,18 @@
 <?php
 
 use App\Http\Controllers\GuitarController;
+use App\Models\Category;
 use App\Models\Guitar;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $guitars = Guitar::all();
+    $guitars = Guitar::with('category')->get();
+    $categories = Category::all();
 
-    return view('app', ['guitars' => $guitars]);
+    return view('app', [
+        'guitars' => $guitars,
+        'categories' => $categories,
+    ]);
 });
 
 Route::post("/guitars", [GuitarController::class, 'store'])->name("guitars.store");

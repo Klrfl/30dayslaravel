@@ -21,7 +21,13 @@
                 @csrf
                 <input type="text" class="form-control" name="name" placeholder="nama" required />
                 <input type="text" class="form-control" name="model" placeholder="model" required />
-                <input type="text" class="form-control" name="category" placeholder="kategori" required />
+                <select name="category_id" id="category" class="form-control">
+                    <option value="" disabled selected>Pilih satu</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+
                 <input type="text" class="form-control" name="description" placeholder="deskripsi" required />
                 <input type="number" class="form-control" name="price" min="0" placeholder="harga" required />
 

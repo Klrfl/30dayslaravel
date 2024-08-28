@@ -14,8 +14,12 @@
             required>
         <input class="form-control" type="text" name="model" value="{{ $guitar->model }}" placeholder="model"
             required>
-        <input class="form-control" type="text" name="category" value="{{ $guitar->category }}" placeholder="type"
-            required>
+        <select name="category_id" id="category" class="form-control" required>
+                        <option value="" disabled selected>Pilih satu</option>
+                    @foreach ($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+        </select>
         <input class="form-control" type="text" name="description" value="{{ $guitar->description }}"
             placeholder="description" required>
         <input class="form-control" type="text" name="price" value="{{ $guitar->price }}" placeholder="price"
