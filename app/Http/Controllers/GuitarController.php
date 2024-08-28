@@ -26,7 +26,7 @@ class GuitarController extends Controller
 
     public function edit(string $id)
     {
-        $guitar = Guitar::find($id);
+        $guitar = Guitar::with('category')->find($id);
         $categories = Category::all();
 
         return view("components.guitar-edit-form", [
