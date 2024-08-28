@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
-    @vite('resources/css/app.css')
-    <script defer src="https://unpkg.com/htmx.org@2.0.2"></script>
-    <script defer src="https://unpkg.com/@fylgja/alpinejs-dialog/dist/index.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -17,19 +14,27 @@
         <header class="py-4 h-max col-span-6 md:sticky md:top-0 md:col-span-2">
             <h1>GitarDB</h1>
             <p class="leading-relaxed my-2">Kumpulan gitar</p>
-            <form hx-post="{{ route('guitars.store') }}" hx-target="#list" hx-swap="afterbegin" class="p-4 bg-slate-200">
+            <form hx-post="{{ route('guitars.store') }}" hx-target="#list" hx-swap="afterbegin" class="p-4 bg-slate-200 flex flex-col gap-2">
                 @csrf
-                <input type="text" class="form-control" name="name" placeholder="nama" required />
-                <input type="text" class="form-control" name="model" placeholder="model" required />
-                <select name="category_id" id="category" class="form-control">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" class="form-control" name="name" placeholder="nama" required />
+
+                <label for="model">Model</label>
+                <input type="text" id="model" class="form-control" name="model" placeholder="model" required />
+
+                <label for="category_id">Kategori</label>
+                <select name="category_id" id="category_id" id="category" class="form-control">
                     <option value="" disabled selected>Pilih satu</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
 
-                <input type="text" class="form-control" name="description" placeholder="deskripsi" required />
-                <input type="number" class="form-control" name="price" min="0" placeholder="harga" required />
+                <label for="description">deskripsi</label>
+                <input type="text" id="description" class="form-control" name="description" placeholder="deskripsi" required />
+
+                <label for="price">harga</label>
+                <input type="number" id="price" class="form-control" name="price" min="0" placeholder="harga" required />
 
                 <button class="btn bg-blue-500 text-white">Tambah gitar</button>
             </form>
@@ -45,9 +50,8 @@
                         <th>Harga</th>
                         <th class="text-right">Aksi</th>
                     </tr>
-
-
                 </thead>
+
                 <tbody id="list">
                     @empty($guitars)
                         <tr>
