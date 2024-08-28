@@ -1,7 +1,7 @@
 <tr class="even:bg-slate-100" id="guitar-{{ $guitar->id }}">
     <td>{{ $guitar->name }}</td>
     <td>{{ $guitar->model }}</td>
-    <td>{{ $guitar->type }}</td>
+    <td>{{ $guitar->category->name }}</td>
     <td class="font-semibold">{{ $guitar->price }}</td>
     <td class="text-right flex gap-2 justify-end">
         <button class="ring-2 ring-red-300 btn" hx-confirm="apakah anda benar-benar ingin menghapus?"

@@ -14,7 +14,7 @@
             required>
         <input class="form-control" type="text" name="model" value="{{ $guitar->model }}" placeholder="model"
             required>
-        <input class="form-control" type="text" name="type" value="{{ $guitar->type }}" placeholder="type"
+        <input class="form-control" type="text" name="category" value="{{ $guitar->category }}" placeholder="type"
             required>
         <input class="form-control" type="text" name="description" value="{{ $guitar->description }}"
             placeholder="description" required>

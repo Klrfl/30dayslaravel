@@ -19,7 +19,7 @@ class GuitarFactory extends Factory
         return [
             'name' => 'nama gitar',
             'model' => fake()->bothify('??-###'),
-            'type' => fake()->randomElement(['elektrik', 'akustik', 'nilon']),
+            'category_id' => fake()->randomElement([1, 2, 3]),
             'description' => fake()->sentence(),
             'price' => fake()->randomNumber(6, true),
         ];

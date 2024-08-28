@@ -21,9 +21,9 @@
                 @csrf
                 <input type="text" class="form-control" name="name" placeholder="nama" required />
                 <input type="text" class="form-control" name="model" placeholder="model" required />
-                <input type="text" class="form-control" name="type" placeholder="type" required />
-                <input type="text" class="form-control" name="description" placeholder="description" required />
-                <input type="number" class="form-control" name="price" min="0" placeholder="price" required />
+                <input type="text" class="form-control" name="category" placeholder="kategori" required />
+                <input type="text" class="form-control" name="description" placeholder="deskripsi" required />
+                <input type="number" class="form-control" name="price" min="0" placeholder="harga" required />
 
                 <button class="btn bg-blue-500 text-white">Tambah gitar</button>
             </form>
@@ -35,7 +35,7 @@
                     <tr class="text-left">
                         <th>Nama</th>
                         <th>Model</th>
-                        <th>Tipe</th>
+                        <th>Kategori</th>
                         <th>Harga</th>
                         <th class="text-right">Aksi</th>
                     </tr>

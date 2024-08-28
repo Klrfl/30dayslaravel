@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('model');
-            $table->string('type');
+            $table->bigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('description');
             $table->decimal('price', total: 12, places: 3);
             $table->timestamps();

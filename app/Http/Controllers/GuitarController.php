@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Guitar;
 use Illuminate\Http\Request;
 
@@ -13,20 +14,26 @@ class GuitarController extends Controller
 
         $newGuitar = new Guitar();
         $newGuitar->name = $input['name'];
-        $newGuitar->type = $input['type'];
+        $newGuitar->category_id = $input['category_id'];
         $newGuitar->model = $input['model'];
         $newGuitar->description = $input['description'];
         $newGuitar->price = $input['price'];
 
         $newGuitar->saveOrFail();
 
-        return view('components.guitar', ['guitar' => $newGuitar]);
+        return view('components.guitar', ['guitar' => Guitar::find($newGuitar->id)->load('category')]);
     }
 
     public function edit(string $id)
     {
         $guitar = Guitar::find($id);
-        return view("components.guitar-edit-form", ['guitar' => $guitar, 'open' => true]);
+        $categories = Category::all();
+
+        return view("components.guitar-edit-form", [
+            'guitar' => $guitar,
+            'open' => true,
+            'categories' => $categories,
+        ]);
     }
 
     public function update(Request $request, string $id)
@@ -36,7 +43,7 @@ class GuitarController extends Controller
 
         $newGuitar->name = $input['name'];
         $newGuitar->model = $input['model'];
-        $newGuitar->type = $input['type'];
+        $newGuitar->category_id = $input['category_id'];
         $newGuitar->description = $input['description'];
         $newGuitar->price = $input['price'];
 
