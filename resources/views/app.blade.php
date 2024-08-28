@@ -14,7 +14,7 @@
 
 <body>
     <main class="max-w-6xl mx-auto px-4 md:grid md:grid-cols-6 gap-4">
-        <header class="py-4 sticky top-0 h-max col-span-6 md:col-span-2">
+        <header class="py-4 h-max col-span-6 md:sticky md:top-0 md:col-span-2">
             <h1>GitarDB</h1>
             <p class="leading-relaxed my-2">Kumpulan gitar</p>
             <form hx-post="{{ route('guitars.store') }}" hx-target="#list" hx-swap="afterbegin" class="p-4 bg-slate-200">
