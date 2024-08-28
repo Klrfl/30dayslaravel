@@ -44,11 +44,11 @@
             <table class="list-decimal w-full min-w-max" hx-target="closest tr" hx-swap="outerHTML swap:500ms">
                 <thead>
                     <tr class="text-left">
-                        <th>Nama</th>
-                        <th>Model</th>
-                        <th>Kategori</th>
-                        <th>Harga</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="p-2">Nama</th>
+                        <th class="p-2">Model</th>
+                        <th class="p-2">Kategori</th>
+                        <th class="p-2">Harga</th>
+                        <th class="p-2 text-right">Aksi</th>
                     </tr>
                 </thead>
 

@@ -6,7 +6,7 @@ use App\Models\Guitar;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $guitars = Guitar::with('category')->get();
+    $guitars = Guitar::with('category')->orderBy('created_at', 'desc')->get();
     $categories = Category::all();
 
     return view('app', [

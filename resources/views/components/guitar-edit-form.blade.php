@@ -5,10 +5,10 @@
         x-data="{dialogIsVisible: false}" @endif
     class="p-4 fixed inset-0 m-0 size-full open:bg-slate-200/90 open:backdrop-blur-xl grid place-items-center"
     x-show="dialogIsVisible" x-dialog="dialogIsVisible = false" @click.self="dialogIsVisible = false" id="dialog">
-    <form hx-post="{{ route('guitars.update', $guitar->id) }}" class="min-w-[100ch] max-w-full bg-slate-200 p-4 flex flex-col gap-2"
+    <form hx-post="{{ route('guitars.update', $guitar->id) }}" class="container md:max-w-screen-sm bg-slate-200 p-4 flex flex-col gap-2"
         hx-target="#guitar-{{ $guitar->id }}" hx-swap="outerHTML">
         @csrf
-        <button @click="dialogIsVisible = false" type="button">Close</button>
+        <button @click="dialogIsVisible = false" type="button" class="btn ring-2 ring-blue-500 self-end">Close</button>
 
         <input class="form-control" type="text" name="name" value="{{ $guitar->name }}" placeholder="name"
             required>
