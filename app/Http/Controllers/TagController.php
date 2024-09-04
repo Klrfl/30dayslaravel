@@ -54,7 +54,10 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $tag->name = $request->name;
+        $tag->save();
+
+        return redirect()->route('tags.index');
     }
 
     /**
