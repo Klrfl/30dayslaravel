@@ -1,5 +1,4 @@
 <tr class="even:bg-slate-200">
-    <td class="py-2 px-3">{{ $iteration }}</td>
     <td class="py-2 px-3">{{ $tag->name }}</td>
     <td class="py-2 px-3">
         <a href="{{ route('tags.edit', $tag->id) }}"

@@ -12,7 +12,7 @@ class Tag extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public ModelsTag $tag, public int $iteration)
+    public function __construct(public ModelsTag $tag)
     {
         //
     }
