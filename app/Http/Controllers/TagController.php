@@ -30,7 +30,12 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newTag = new Tag();
+        $newTag->name = $request->name;
+
+        $newTag->save();
+
+        return view("components.tag", ['tag' => $newTag]);
     }
 
     /**
@@ -65,6 +70,6 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->deleteOrFail();
     }
 }
