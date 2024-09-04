@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class GuitarController extends Controller
 {
+    public function index()
+    {
+        $guitars = Guitar::with('category')->orderBy('created_at', 'desc')->get();
+        $categories = Category::all();
+
+        return view('app', [
+            'guitars' => $guitars,
+            'categories' => $categories,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $input = $request->all();
