@@ -24,6 +24,12 @@
             <button type="submit" class="py-2 px-3 bg-blue-500 text-gray-100">
                 Edit
             </button>
+
+        <button type="button" hx-confirm="are you sure?" hx-delete="{{ route('tags.destroy', $tag->id) }}"
+            hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
+            class="p-2 outline outline-red-400 hover:bg-red-400 hover:text-white">
+            Hapus
+        </button>
         </form>
 
         <ul>
@@ -35,6 +41,8 @@
                 <li>{{ $guitar->name }}</li>
             @endforeach
         </ul>
+
+
     </main>
 </body>
 

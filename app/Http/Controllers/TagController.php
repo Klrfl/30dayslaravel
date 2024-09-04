@@ -71,5 +71,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->deleteOrFail();
+
+        return response(201)->header("HX-Redirect", route('tags.index'));
     }
 }
