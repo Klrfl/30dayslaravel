@@ -11,6 +11,7 @@
 <body>
     <main class="px-4 max-w-xl mx-auto">
         <h1>Edit tag</h1>
+        <a href="{{ route('tags.index') }}">Kembali</a>
 
         <form action="{{ route('tags.update', $tag->id) }}" class="flex flex-col gap-4 p-4 bg-slate-200" method="POST">
             @csrf
@@ -25,23 +26,24 @@
                 Edit
             </button>
 
-        <button type="button" hx-confirm="are you sure?" hx-delete="{{ route('tags.destroy', $tag->id) }}"
-            hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
-            class="p-2 outline outline-red-400 hover:bg-red-400 hover:text-white">
-            Hapus
-        </button>
+            <button type="button" hx-confirm="are you sure?" hx-delete="{{ route('tags.destroy', $tag->id) }}"
+                hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
+                class="p-2 outline outline-red-400 hover:bg-red-400 hover:text-white">
+                Hapus
+            </button>
         </form>
 
-        <ul>
+        <table>
             @if (sizeof($tag->guitars) == 0)
                 <li>belum ada gitar dengan tag ini.</li>
             @endif
 
             @foreach ($tag->guitars as $guitar)
-                <li>{{ $guitar->name }}</li>
+                <x-guitar :guitar="$guitar" />
             @endforeach
-        </ul>
+        </table>
 
+        <div id="dialog"></div>
 
     </main>
 </body>

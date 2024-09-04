@@ -30,6 +30,14 @@
         <input class="form-control" type="text" name="price" value="{{ $guitar->price }}" placeholder="price"
             required>
 
+        @foreach ($tags as $tag)
+            <span class="flex gap-2">
+                <input type="checkbox" name="tag[]" id="tag-{{ $tag->id }}" value="{{ $tag->id }}"
+                    @checked(in_array($tag->id, $currentTags))>
+                <label for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+            </span>
+        @endforeach
+
         <button type="submit" class="bg-blue-500 text-white btn" @click="dialogIsVisible = false">
             Edit
         </button>

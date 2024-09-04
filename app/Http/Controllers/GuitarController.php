@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Guitar;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class GuitarController extends Controller
@@ -39,11 +40,15 @@ class GuitarController extends Controller
     {
         $guitar = Guitar::with('category')->find($id);
         $categories = Category::all();
+        $tags = Tag::all();
+        $currentTags = $guitar->tags()->pluck('tags.id')->all();
 
         return view("components.guitar-edit-form", [
             'guitar' => $guitar,
             'open' => true,
             'categories' => $categories,
+            'tags' => $tags,
+            'currentTags' => $currentTags,
         ]);
     }
 
@@ -57,6 +62,12 @@ class GuitarController extends Controller
         $newGuitar->category_id = $input['category_id'];
         $newGuitar->description = $input['description'];
         $newGuitar->price = $input['price'];
+
+        if ($request->has('tag')) {
+            $newGuitar->tags()->sync($input['tag']);
+        } else {
+            $newGuitar->tags()->detach();
+        }
 
         $newGuitar->saveOrFail();
 
