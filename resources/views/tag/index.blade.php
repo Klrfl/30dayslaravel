@@ -3,7 +3,8 @@
         <h1>Tags</h1>
         <p>Kelola semua tag gitar di sini.</p>
 
-        <form hx-post="{{ route('tags.store') }}" hx-swap="afterbegin" hx-target="#list" class="bg-slate-200 p-4 flex flex-col gap-4">
+        <form hx-post="{{ route('tags.store') }}" hx-swap="afterbegin" hx-target="#list"
+            class="bg-slate-200 p-4 flex flex-col gap-4">
             @csrf
 
             <label for="name">Nama</label>
@@ -16,8 +17,8 @@
     <div class="col-span-6 md:col-span-4">
         <table class="w-full">
             <thead>
-                <th>Nama</th>
-                <th>Aksi</th>
+                <th class="px-3 text-left">Nama</th>
+                <th class="px-3 text-left">Aksi</th>
             </thead>
 
             <tbody id="list">

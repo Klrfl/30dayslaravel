@@ -9,9 +9,12 @@
 </head>
 
 <body>
-    <main class="px-4 max-w-xl mx-auto">
-        <h1>Edit tag</h1>
-        <a href="{{ route('tags.index') }}">Kembali</a>
+    <main class="px-4 max-w-xl mx-auto flex flex-col gap-4">
+        <header>
+
+            <h1>Edit tag</h1>
+            <a href="{{ route('tags.index') }}">Kembali</a>
+        </header>
 
         <form action="{{ route('tags.update', $tag->id) }}" class="flex flex-col gap-4 p-4 bg-slate-200" method="POST">
             @csrf
@@ -33,15 +36,19 @@
             </button>
         </form>
 
-        <table>
-            @if (sizeof($tag->guitars) == 0)
-                <li>belum ada gitar dengan tag ini.</li>
-            @endif
+        <section>
+            <h2 class="text-lg">Gitar dengan tag <span class="font-bold">{{ $tag->name }}</span></h2>
 
-            @foreach ($tag->guitars as $guitar)
-                <x-guitar :guitar="$guitar" />
-            @endforeach
-        </table>
+            <table class="w-full">
+                @if (sizeof($tag->guitars) == 0)
+                    <li>belum ada gitar dengan tag ini.</li>
+                @endif
+
+                @foreach ($tag->guitars as $guitar)
+                    <x-guitar :guitar="$guitar" />
+                @endforeach
+            </table>
+        </section>
 
         <div id="dialog"></div>
 
