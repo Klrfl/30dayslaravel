@@ -10,4 +10,9 @@ class Controller extends BaseController
     {
         return view("app");
     }
+
+    protected function login()
+    {
+        return view("login");
+    }
 }
