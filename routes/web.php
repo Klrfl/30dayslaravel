@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\GuitarController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/', [Controller::class, 'index'])->name('home');
 
 Route::get("/guitars", [GuitarController::class, 'index'])->name("guitars.index");
 Route::post("/guitars", [GuitarController::class, 'store'])->name("guitars.store");
