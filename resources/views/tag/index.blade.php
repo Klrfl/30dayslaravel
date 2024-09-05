@@ -1,48 +1,30 @@
-<!DOCTYPE html>
-<html>
+<x-layout title="Tag">
+    <header class="col-span-6">
+        <h1>Tags</h1>
+        <p>Kelola semua tag gitar di sini.</p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <form hx-post="{{ route('tags.store') }}" hx-swap="afterbegin" hx-target="#list">
+            @csrf
 
-    <title>Tags | GuitarDB</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+            <label for="name">Nama</label>
+            <input type="text" class="form-control" placeholder="nama" name="name" required>
 
-<body>
-    <main class="max-w-6xl mx-auto px-4 md:grid md:grid-cols-6 gap-4">
-        <header class="col-span-6">
-            <h1>Tags</h1>
-            <p>Kelola semua tag gitar di sini.</p>
+            <button type="submit" class="py-2 px-4 outline outline-blue-500">Tambah tag baru</button>
+        </form>
+    </header>
 
-            <form hx-post="{{ route('tags.store') }}" hx-swap="afterbegin" hx-target="#list">
-                @csrf
+    <div class="col-span-6">
+        <table class="w-full">
+            <thead>
+                <th>Nama</th>
+                <th>Aksi</th>
+            </thead>
 
-                <label for="name">Nama</label>
-                <input type="text" class="form-control" placeholder="nama" name="name" required>
-
-                <button type="submit" class="py-2 px-4 outline outline-blue-500">Tambah tag baru</button>
-            </form>
-        </header>
-
-        <div class="col-span-6">
-            <table class="w-full">
-                <thead>
-                    <th>Nama</th>
-                    <th>Aksi</th>
-                </thead>
-
-                <tbody id="list">
-                    @foreach ($tags as $tag)
-                        <x-tag :tag="$tag" :iteration="$loop->iteration" />
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-
-    </main>
-
-</body>
-
-</html>
+            <tbody id="list">
+                @foreach ($tags as $tag)
+                    <x-tag :tag="$tag" :iteration="$loop->iteration" />
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</x-layout>
