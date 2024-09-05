@@ -14,7 +14,7 @@ class GuitarController extends Controller
         $guitars = Guitar::with('category')->orderBy('created_at', 'desc')->get();
         $categories = Category::all();
 
-        return view('app', [
+        return view('guitars.index', [
             'guitars' => $guitars,
             'categories' => $categories,
         ]);
