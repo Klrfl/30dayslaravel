@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 @layer components {
-    h1 {
-        @apply text-4xl;
-    }
+  h1 {
+    @apply text-4xl;
+  }
 
-    .htmx-swapping,
-    .htmx-settling {
-        transition: opacity 500ms ease;
-    }
+  .htmx-swapping,
+  .htmx-settling {
+    transition: opacity 500ms ease;
+  }
 
-    .htmx-swapping {
-        opacity: 0;
-    }
+  .htmx-swapping {
+    opacity: 0;
+  }
 
-    .htmx-added {
-        opacity: 1;
-    }
+  .htmx-added {
+    opacity: 1;
+  }
 }

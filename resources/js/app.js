@@ -1,8 +1,8 @@
 import './bootstrap';
 
-import "htmx.org";
-import Alpine from "alpinejs";
-import dialog from "@fylgja/alpinejs-dialog";
+import 'htmx.org';
+import Alpine from 'alpinejs';
+import dialog from '@fylgja/alpinejs-dialog';
 
 window.Alpine = Alpine;
 
