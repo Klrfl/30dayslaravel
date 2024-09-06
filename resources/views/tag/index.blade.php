@@ -4,13 +4,13 @@
         <p>Kelola semua tag gitar di sini.</p>
 
         <form hx-post="{{ route('tags.store') }}" hx-swap="afterbegin" hx-target="#list"
-            class="bg-slate-200 p-4 flex flex-col gap-4">
+            class="form-control gap-4 p-4 shadow-lg">
             @csrf
 
             <label for="name">Nama</label>
-            <input type="text" class="form-control" placeholder="nama" name="name" required>
+            <input type="text" class="input input-bordered" placeholder="nama" name="name" required>
 
-            <button type="submit" class="py-2 px-4 outline outline-blue-500">Tambah tag baru</button>
+            <button type="submit" class="btn ring ring-blue-500">Tambah tag baru</button>
         </form>
     </header>
 

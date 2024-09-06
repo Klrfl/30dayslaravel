@@ -4,7 +4,7 @@
     </header>
 
     <form action="{{ route('login.authenticate') }}" method="POST"
-        class="outline outline-slate-200 p-4 rounded-lg col-start-3 col-end-5 flex flex-col gap-4">
+        class="col-start-3 col-end-5 shadow-md p-4 rounded-lg form-control gap-4 bg-slate-800/50">
         @csrf
 
         @if ($errors->any())
@@ -14,13 +14,14 @@
         @endif
 
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" class="form-control" placeholder="email@email.kamu"
+        <input type="email" name="email" id="email" class="input input-bordered" placeholder="email@email.kamu"
             value="{{ old('email') }}" required>
 
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" class="form-control" placeholder="password kamu" required>
+        <input type="password" name="password" id="password" class="input input-bordered" placeholder="password kamu"
+            required>
 
-        <button type="submit" class="block bg-blue-500 px-4 py-2 text-gray-100">
+        <button type="submit" class="btn btn-primary">
             Login
         </button>
     </form>

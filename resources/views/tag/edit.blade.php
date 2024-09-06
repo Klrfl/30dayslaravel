@@ -16,22 +16,22 @@
             <a href="{{ route('tags.index') }}">Kembali</a>
         </header>
 
-        <form action="{{ route('tags.update', $tag->id) }}" class="flex flex-col gap-4 p-4 bg-slate-200" method="POST">
+        <form action="{{ route('tags.update', $tag->id) }}" class="flex flex-col gap-4 p-2 shadow-md" method="POST">
             @csrf
             @method('PUT')
 
             <label for="name">Nama</label>
 
-            <input type="text" name="name" placeholder="nama" class="form-control"
-                value="{{ old('name', $tag->name) }}" required>
+            <input type="text" name="name" placeholder="nama" class="input" value="{{ old('name', $tag->name) }}"
+                required>
 
-            <button type="submit" class="py-2 px-3 bg-blue-500 text-gray-100">
+            <button type="submit" class="btn ring ring-primary text-gray-100">
                 Edit
             </button>
 
             <button type="button" hx-confirm="are you sure?" hx-delete="{{ route('tags.destroy', $tag->id) }}"
                 hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
-                class="p-2 outline outline-red-400 hover:bg-red-400 hover:text-white">
+                class="btn ring ring-red-400 hover:bg-red-400 hover:text-white">
                 Hapus
             </button>
         </form>

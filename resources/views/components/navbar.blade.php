@@ -1,9 +1,8 @@
-<nav>
-    <ul class="flex bg-slate-100">
+<nav class="navbar shadow-md">
+    <ul class="menu menu-horizontal">
         <li>
             <a @class([
                 'font-bold' => request()->routeIs('home'),
-                'block px-4 py-2 hover:bg-slate-200',
             ]) href="{{ route('home') }}">Home</a>
         </li>
 
@@ -11,7 +10,6 @@
             <li>
                 <a @class([
                     'font-bold' => request()->routeIs('guitars.index'),
-                    'block px-4 py-2 hover:bg-slate-200',
                 ]) href="{{ route('guitars.index') }}">
                     Gitar
                 </a>
@@ -19,7 +17,6 @@
             <li>
                 <a @class([
                     'font-bold' => request()->routeIs('tags.index'),
-                    'block px-4 py-2 hover:bg-slate-200',
                 ]) href="{{ route('tags.index') }}">
                     Tag
                 </a>
@@ -29,7 +26,6 @@
             @guest
                 <a @class([
                     'font-bold' => request()->routeIs('login'),
-                    'block px-4 py-2 hover:bg-slate-200',
                 ]) href="{{ route('login') }}">Login</a>
             @endguest
 
