@@ -1,28 +1,27 @@
 <x-layout title="Tag">
-  <header class="col-span-6 md:col-span-2">
+  <header class="col-span-full">
     <h1>Tags</h1>
     <p>Kelola semua tag gitar di sini.</p>
-
-    <form
-      hx-post="{{ route('tags.store') }}"
-      hx-swap="afterbegin"
-      hx-target="#list"
-      class="form-control gap-4 p-4 shadow-lg"
-    >
-      @csrf
-
-      <label for="name">Nama</label>
-      <input
-        type="text"
-        class="input input-bordered"
-        placeholder="nama"
-        name="name"
-        required
-      />
-
-      <button type="submit" class="btn btn-primary">Tambah tag baru</button>
-    </form>
   </header>
+  <form
+    hx-post="{{ route('tags.store') }}"
+    hx-swap="afterbegin"
+    hx-target="#list"
+    class="form-control col-span-6 gap-4 p-4 shadow-lg md:col-span-2"
+  >
+    @csrf
+
+    <label for="name">Nama</label>
+    <input
+      type="text"
+      class="input input-bordered"
+      placeholder="nama"
+      name="name"
+      required
+    />
+
+    <button type="submit" class="btn btn-primary">Tambah tag baru</button>
+  </form>
 
   <div class="col-span-6 md:col-span-4">
     <table class="table table-zebra">
