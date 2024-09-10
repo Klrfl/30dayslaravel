@@ -20,14 +20,12 @@
         required
       />
 
-      <button type="submit" class="btn ring ring-blue-500">
-        Tambah tag baru
-      </button>
+      <button type="submit" class="btn btn-primary">Tambah tag baru</button>
     </form>
   </header>
 
   <div class="col-span-6 md:col-span-4">
-    <table class="w-full">
+    <table class="table table-zebra">
       <thead>
         <th class="px-3 text-left">Nama</th>
         <th class="px-3 text-left">Aksi</th>

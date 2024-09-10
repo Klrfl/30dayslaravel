@@ -5,7 +5,7 @@
   @else
       x-data="{ dialogIsVisible: false }"
   @endif
-  class="fixed inset-0 m-0 grid size-full place-items-center p-4 open:bg-slate-200/90 open:backdrop-blur-xl"
+  class="modal backdrop-blur-sm backdrop-brightness-50"
   x-show="dialogIsVisible"
   x-dialog="dialogIsVisible = false"
   @click.self="dialogIsVisible = false"
@@ -13,21 +13,25 @@
 >
   <form
     hx-put="{{ route("guitars.update", $guitar->id) }}"
-    class="container flex flex-col gap-2 bg-slate-200 p-4 md:max-w-screen-sm"
+    class="dark:bg-base modal-box flex flex-col gap-2"
     hx-target="#guitar-{{ $guitar->id }}"
     hx-swap="outerHTML"
   >
     @csrf
-    <button
-      @click="dialogIsVisible = false"
-      type="button"
-      class="btn self-end ring-2 ring-blue-500"
-    >
-      Close
-    </button>
+    <header class="mb-6 flex items-center justify-between gap-4">
+      <h2>Edit gitar</h2>
+
+      <button
+        @click="dialogIsVisible = false"
+        type="button"
+        class="btn btn-outline btn-primary self-end"
+      >
+        Close
+      </button>
+    </header>
 
     <input
-      class="form-control"
+      class="input input-bordered"
       type="text"
       name="name"
       value="{{ $guitar->name }}"
@@ -35,14 +39,19 @@
       required
     />
     <input
-      class="form-control"
+      class="input input-bordered"
       type="text"
       name="model"
       value="{{ $guitar->model }}"
       placeholder="model"
       required
     />
-    <select name="category_id" id="category" class="form-control" required>
+    <select
+      name="category_id"
+      id="category"
+      class="select select-bordered"
+      required
+    >
       <option value="" disabled selected>Pilih satu</option>
       @foreach ($categories as $category)
         @if ($category->id == $guitar->category->id)
@@ -57,7 +66,7 @@
       @endforeach
     </select>
     <input
-      class="form-control"
+      class="input input-bordered"
       type="text"
       name="description"
       value="{{ $guitar->description }}"
@@ -65,7 +74,7 @@
       required
     />
     <input
-      class="form-control"
+      class="input input-bordered"
       type="text"
       name="price"
       value="{{ $guitar->price }}"
@@ -88,12 +97,14 @@
       </span>
     @endforeach
 
-    <button
-      type="submit"
-      class="btn bg-blue-500 text-white"
-      @click="dialogIsVisible = false"
-    >
-      Edit
-    </button>
+    <div class="modal-action">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        @click="dialogIsVisible = false"
+      >
+        Edit
+      </button>
+    </div>
   </form>
 </dialog>
