@@ -11,13 +11,32 @@
     >
       @csrf
       <label for="nama">Nama</label>
-      <input type="text" id="nama" name="name" class="input input-bordered" placeholder="nama" required />
+      <input
+        type="text"
+        id="nama"
+        name="name"
+        class="input input-bordered"
+        placeholder="nama"
+        required
+      />
 
       <label for="model">Model</label>
-      <input type="text" id="model" class="input input-bordered" name="model" placeholder="model" required />
+      <input
+        type="text"
+        id="model"
+        class="input input-bordered"
+        name="model"
+        placeholder="model"
+        required
+      />
 
       <label for="category_id">Kategori</label>
-      <select name="category_id" id="category_id" id="category" class="select select-bordered">
+      <select
+        name="category_id"
+        id="category_id"
+        id="category"
+        class="select select-bordered"
+      >
         <option value="" disabled selected>Pilih satu</option>
         @foreach ($categories as $category)
           <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -35,14 +54,26 @@
       />
 
       <label for="price">harga</label>
-      <input type="number" id="price" class="input input-bordered" name="price" min="0" placeholder="harga" required />
+      <input
+        type="number"
+        id="price"
+        class="input input-bordered"
+        name="price"
+        min="0"
+        placeholder="harga"
+        required
+      />
 
       <button class="btn outline outline-primary">Tambah gitar</button>
     </form>
   </header>
 
   <div class="col-span-6 overflow-auto pb-12 pt-4 md:col-span-4">
-    <table class="table table-zebra" hx-target="closest tr" hx-swap="outerHTML swap:500ms">
+    <table
+      class="table table-zebra"
+      hx-target="closest tr"
+      hx-swap="outerHTML swap:500ms"
+    >
       <thead>
         <tr class="text-left">
           <th class="p-2">Nama</th>

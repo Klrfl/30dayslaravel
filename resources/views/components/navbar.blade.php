@@ -1,9 +1,14 @@
 <nav class="navbar shadow-md">
   <ul class="menu menu-horizontal">
     <li>
-      <a @class([
-        'font-bold' => request()->routeIs('home'),
-      ]) href="{{ route('home') }}">Home</a>
+      <a
+        @class([
+          'font-bold' => request()->routeIs('home'),
+        ])
+        href="{{ route('home') }}"
+      >
+        Home
+      </a>
     </li>
 
     @auth
@@ -31,9 +36,12 @@
 
     <li>
       @guest
-        <a @class([
-          'font-bold' => request()->routeIs('login'),
-        ]) href="{{ route('login') }}">
+        <a
+          @class([
+            'font-bold' => request()->routeIs('login'),
+          ])
+          href="{{ route('login') }}"
+        >
           Login
         </a>
       @endguest

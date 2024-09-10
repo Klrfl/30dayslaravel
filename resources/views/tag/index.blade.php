@@ -12,9 +12,17 @@
       @csrf
 
       <label for="name">Nama</label>
-      <input type="text" class="input input-bordered" placeholder="nama" name="name" required />
+      <input
+        type="text"
+        class="input input-bordered"
+        placeholder="nama"
+        name="name"
+        required
+      />
 
-      <button type="submit" class="btn ring ring-blue-500">Tambah tag baru</button>
+      <button type="submit" class="btn ring ring-blue-500">
+        Tambah tag baru
+      </button>
     </form>
   </header>
 

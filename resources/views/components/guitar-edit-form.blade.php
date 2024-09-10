@@ -18,17 +18,41 @@
     hx-swap="outerHTML"
   >
     @csrf
-    <button @click="dialogIsVisible = false" type="button" class="btn self-end ring-2 ring-blue-500">Close</button>
+    <button
+      @click="dialogIsVisible = false"
+      type="button"
+      class="btn self-end ring-2 ring-blue-500"
+    >
+      Close
+    </button>
 
-    <input class="form-control" type="text" name="name" value="{{ $guitar->name }}" placeholder="name" required />
-    <input class="form-control" type="text" name="model" value="{{ $guitar->model }}" placeholder="model" required />
+    <input
+      class="form-control"
+      type="text"
+      name="name"
+      value="{{ $guitar->name }}"
+      placeholder="name"
+      required
+    />
+    <input
+      class="form-control"
+      type="text"
+      name="model"
+      value="{{ $guitar->model }}"
+      placeholder="model"
+      required
+    />
     <select name="category_id" id="category" class="form-control" required>
       <option value="" disabled selected>Pilih satu</option>
       @foreach ($categories as $category)
         @if ($category->id == $guitar->category->id)
-          <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+          <option value="{{ $category->id }}" selected>
+            {{ $category->name }}
+          </option>
         @else
-          <option value="{{ $category->id }}">{{ $category->name }}</option>
+          <option value="{{ $category->id }}">
+            {{ $category->name }}
+          </option>
         @endif
       @endforeach
     </select>
@@ -40,7 +64,14 @@
       placeholder="description"
       required
     />
-    <input class="form-control" type="text" name="price" value="{{ $guitar->price }}" placeholder="price" required />
+    <input
+      class="form-control"
+      type="text"
+      name="price"
+      value="{{ $guitar->price }}"
+      placeholder="price"
+      required
+    />
 
     @foreach ($tags as $tag)
       <span class="flex gap-2">
@@ -51,10 +82,18 @@
           value="{{ $tag->id }}"
           @checked(in_array($tag->id, $currentTags))
         />
-        <label for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+        <label for="tag-{{ $tag->id }}">
+          {{ $tag->name }}
+        </label>
       </span>
     @endforeach
 
-    <button type="submit" class="btn bg-blue-500 text-white" @click="dialogIsVisible = false">Edit</button>
+    <button
+      type="submit"
+      class="btn bg-blue-500 text-white"
+      @click="dialogIsVisible = false"
+    >
+      Edit
+    </button>
   </form>
 </dialog>

@@ -14,7 +14,11 @@
         <a href="{{ route('tags.index') }}">Kembali</a>
       </header>
 
-      <form action="{{ route('tags.update', $tag->id) }}" class="flex flex-col gap-4 p-2 shadow-md" method="POST">
+      <form
+        action="{{ route('tags.update', $tag->id) }}"
+        class="flex flex-col gap-4 p-2 shadow-md"
+        method="POST"
+      >
         @csrf
         @method('PUT')
 
@@ -29,7 +33,9 @@
           required
         />
 
-        <button type="submit" class="btn text-gray-100 ring ring-primary">Edit</button>
+        <button type="submit" class="btn text-gray-100 ring ring-primary">
+          Edit
+        </button>
 
         <button
           type="button"
