@@ -1,71 +1,59 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Edit Tag | GitarDB</title>
+<x-layout title="Edit tag">
+  <header class="col-span-full">
+    <h1>Edit tag</h1>
+    <a href="{{ route('tags.index') }}">Kembali</a>
+  </header>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-  </head>
+  <form
+    action="{{ route('tags.update', $tag->id) }}"
+    class="form-control col-span-full gap-4 rounded-lg p-8 shadow-md outline outline-1 outline-slate-700 md:col-span-2"
+    method="POST"
+  >
+    @csrf
+    @method('PUT')
 
-  <body>
-    <main class="mx-auto flex max-w-xl flex-col gap-4 px-4">
-      <header>
-        <h1>Edit tag</h1>
-        <a href="{{ route('tags.index') }}">Kembali</a>
-      </header>
+    <label for="name">Nama</label>
 
-      <form
-        action="{{ route('tags.update', $tag->id) }}"
-        class="flex flex-col gap-4 p-2 shadow-md"
-        method="POST"
-      >
-        @csrf
-        @method('PUT')
+    <input
+      type="text"
+      name="name"
+      placeholder="nama"
+      class="input input-bordered"
+      value="{{ old('name', $tag->name) }}"
+      required
+    />
 
-        <label for="name">Nama</label>
+    <button type="submit" class="btn btn-outline btn-primary">Edit</button>
 
-        <input
-          type="text"
-          name="name"
-          placeholder="nama"
-          class="input"
-          value="{{ old('name', $tag->name) }}"
-          required
-        />
+    <button
+      type="button"
+      hx-confirm="are you sure?"
+      hx-delete="{{ route('tags.destroy', $tag->id) }}"
+      hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
+      class="btn btn-outline btn-error"
+    >
+      Hapus
+    </button>
+  </form>
 
-        <button type="submit" class="btn text-gray-100 ring ring-primary">
-          Edit
-        </button>
+  <section class="col-span-full md:col-span-4">
+    <h2>
+      Gitar dengan tag
+      <span class="block text-xl font-bold">{{ $tag->name }}</span>
+    </h2>
 
-        <button
-          type="button"
-          hx-confirm="are you sure?"
-          hx-delete="{{ route('tags.destroy', $tag->id) }}"
-          hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
-          class="btn ring ring-red-400 hover:bg-red-400 hover:text-white"
-        >
-          Hapus
-        </button>
-      </form>
+    @if (sizeof($tag->guitars) == 0)
+      <span class="text-sm dark:text-gray-500">
+        belum ada gitar dengan tag ini.
+      </span>
+    @endif
 
-      <section>
-        <h2 class="text-lg">
-          Gitar dengan tag
-          <span class="font-bold">{{ $tag->name }}</span>
-        </h2>
+    <table class="table table-zebra">
+      @foreach ($tag->guitars as $guitar)
+        <x-guitar :guitar="$guitar" />
+      @endforeach
+    </table>
+  </section>
 
-        <table class="w-full">
-          @if (sizeof($tag->guitars) == 0)
-            <li>belum ada gitar dengan tag ini.</li>
-          @endif
-
-          @foreach ($tag->guitars as $guitar)
-            <x-guitar :guitar="$guitar" />
-          @endforeach
-        </table>
-      </section>
-
-      <div id="dialog"></div>
-    </main>
-  </body>
-</html>
+  <div id="dialog"></div>
+</x-layout>
