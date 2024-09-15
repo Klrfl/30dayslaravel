@@ -2,7 +2,11 @@ import daisyui from 'daisyui';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./resources/**/*.{js,css}', './resources/**/*.blade.php'],
+  content: [
+    './resources/**/*.{js,css}',
+    './resources/**/*.blade.php',
+    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+  ],
   theme: {
     extend: {},
   },
