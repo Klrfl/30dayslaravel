@@ -3,11 +3,12 @@
     <h1>GitarDB</h1>
     <p class="my-2 leading-relaxed">Kumpulan gitar</p>
   </header>
+
   <form
     hx-post="{{ route('guitars.store') }}"
     hx-target="#list"
     hx-swap="afterbegin"
-    class="form-control col-span-6 h-max gap-2 rounded-lg p-4 shadow-md md:sticky md:top-0 md:col-span-2"
+    class="form-control col-span-6 h-max gap-2 rounded-lg p-4 shadow-md md:sticky md:top-0 md:col-span-2 md:row-span-2"
   >
     @csrf
     <label for="nama">Nama</label>
@@ -65,6 +66,42 @@
     />
 
     <button class="btn outline outline-primary">Tambah gitar</button>
+  </form>
+
+  <form class="col-span-4 flex gap-2" method="get">
+    <input
+      type="search"
+      placeholder="cari gitar..."
+      value="{{ old('query') }}"
+      name="query"
+      id="query"
+      class="input input-bordered"
+    />
+
+    <select name="category_id" class="select select-bordered">
+      <option value="" selected>Pilih kategori</option>
+
+      @foreach ($categories as $category)
+        <option
+          value="{{ $category->id }}"
+          @selected(old('category_id') == $category->id)
+        >
+          {{ $category->name }}
+        </option>
+      @endforeach
+    </select>
+
+    <select name="tag_id" id="tag" class="select select-bordered">
+      <option value="" selected>pilih tag</option>
+
+      @foreach ($tags as $tag)
+        <option value="{{ $tag->id }}" @selected(old('tag_id' == $tag->id))>
+          {{ $tag->name }}
+        </option>
+      @endforeach
+    </select>
+
+    <button class="btn btn-outline btn-primary ml-auto">Submit</button>
   </form>
 
   <x-guitar-table :guitars="$guitars" />
