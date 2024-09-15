@@ -18,11 +18,11 @@
     </thead>
 
     <tbody id="list">
-      @empty($guitars)
+      @if (sizeof($guitars) == 0)
         <tr>
           <td>Tidak ada gitar di sini.</td>
         </tr>
-      @endempty
+      @endif
 
       @foreach ($guitars as $guitar)
         <x-guitar :guitar="$guitar" />
