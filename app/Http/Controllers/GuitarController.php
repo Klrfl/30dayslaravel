@@ -57,14 +57,25 @@ class GuitarController extends Controller
         return view('components.guitar', ['guitar' => Guitar::find($newGuitar->id)->load('category')]);
     }
 
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
         $guitar = Guitar::with('category')->find($id);
         $categories = Category::all();
         $tags = Tag::all();
         $currentTags = $guitar->tags()->pluck('tags.id')->all();
 
-        return view("components.guitar-edit-form", [
+        if ($request->hasHeader('HX-Request')) {
+            return view("components.guitar-edit-form", [
+                'guitar' => $guitar,
+                'open' => true,
+                'categories' => $categories,
+                'tags' => $tags,
+                'currentTags' => $currentTags,
+            ]);
+        }
+
+        return view('guitars.edit', [
+            $id,
             'guitar' => $guitar,
             'open' => true,
             'categories' => $categories,
@@ -92,10 +103,14 @@ class GuitarController extends Controller
 
         $newGuitar->saveOrFail();
 
-        return view("components.guitar", [
-            'guitar' => $newGuitar,
-            'open' => true
-        ]);
+        if ($request->header('HX-Request')) {
+            return view("components.guitar", [
+                'guitar' => $newGuitar,
+                'open' => true
+            ]);
+        }
+
+        return redirect()->route('guitars.index');
     }
 
     public function destroy(string $id)

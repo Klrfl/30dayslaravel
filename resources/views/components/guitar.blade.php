@@ -13,13 +13,16 @@
       delete
     </button>
     <button
+    <a
+      href="{{ route('guitars.edit', $guitar->id) }}"
+      hx-get="{{ route('guitars.edit', $guitar->id) }}"
+      hx-push-url="true"
       class="btn btn-sm ring-1 ring-primary"
       @click="dialogIsVisible = true"
-      hx-get="{{ route('guitars.edit', $guitar->id) }}"
       hx-target="#dialog"
       hx-swap="outerHTML"
     >
       Edit
-    </button>
+    </a>
   </td>
 </tr>
