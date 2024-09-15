@@ -1,6 +1,14 @@
 <x-layout>
   <header class="col-span-full md:col-span-4 md:col-start-2">
-    <h1>Edit gitar</h1>
+    <h1 class="mb-4">Edit gitar</h1>
+
+    @if ($errors->any())
+      <ul class="rounded-lg p-4 text-red-500 dark:bg-slate-800">
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    @endif
   </header>
 
   <form

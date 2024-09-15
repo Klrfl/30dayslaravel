@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GuitarRequest;
 use App\Models\Category;
 use App\Models\Guitar;
 use App\Models\Tag;
@@ -84,9 +85,9 @@ class GuitarController extends Controller
         ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(GuitarRequest $request, string $id)
     {
-        $input = $request->all();
+        $input = $request->validated();
         $newGuitar = Guitar::query()->findOrFail($id);
 
         $newGuitar->name = $input['name'];
