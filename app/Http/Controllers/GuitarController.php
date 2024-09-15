@@ -9,10 +9,14 @@ use Illuminate\Http\Request;
 
 class GuitarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $guitars = Guitar::with('category')->orderBy('created_at', 'desc')->get();
+        $guitars = Guitar::with('category')->orderBy('created_at', 'desc')->paginate(10);
         $categories = Category::all();
+
+        if ($request->header('HX-Request')) {
+            return view('components.guitar-table', ['guitars' => $guitars]);
+        };
 
         return view('guitars.index', [
             'guitars' => $guitars,
