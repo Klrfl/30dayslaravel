@@ -79,6 +79,7 @@
     }}"
     hx-target="#table-container"
     hx-swap="outerHTML"
+    hx-push-url="true"
   >
     <input
       type="search"
