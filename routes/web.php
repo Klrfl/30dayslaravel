@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\GuitarController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [Controller::class, 'index'])->name('home');
-Route::get('/login', [Controller::class, 'login'])->name('login');
+Route::get('/', [BaseController::class, 'index'])->name('home');
+Route::get('/login', [BaseController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 
 Route::get("/guitars", [GuitarController::class, 'index'])->name("guitars.index");
