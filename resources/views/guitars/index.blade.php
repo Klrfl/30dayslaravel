@@ -68,7 +68,18 @@
     <button class="btn outline outline-primary">Tambah gitar</button>
   </form>
 
-  <form class="col-span-4 flex gap-2" method="get">
+  <form
+    class="col-span-4 flex gap-2"
+    hx-get="{{
+      route('guitars.index', [
+        'query' => request('query'),
+        'category_id' => request('category_id'),
+        'tag_id' => request('tag_id'),
+      ])
+    }}"
+    hx-target="#table-container"
+    hx-swap="outerHTML"
+  >
     <input
       type="search"
       placeholder="cari gitar..."
