@@ -30,13 +30,13 @@
       </button>
     </header>
 
+    {{ $errors }}
     <input
       class="input input-bordered"
       type="text"
       name="name"
       value="{{ $guitar->name }}"
       placeholder="name"
-      required
     />
     <input
       class="input input-bordered"
@@ -44,14 +44,8 @@
       name="model"
       value="{{ $guitar->model }}"
       placeholder="model"
-      required
     />
-    <select
-      name="category_id"
-      id="category"
-      class="select select-bordered"
-      required
-    >
+    <select name="category_id" id="category" class="select select-bordered">
       <option value="" disabled selected>Pilih satu</option>
       @foreach ($categories as $category)
         @if ($category->id == $guitar->category->id)
@@ -71,7 +65,6 @@
       name="description"
       value="{{ $guitar->description }}"
       placeholder="description"
-      required
     />
     <input
       class="input input-bordered"
@@ -79,7 +72,6 @@
       name="price"
       value="{{ $guitar->price }}"
       placeholder="price"
-      required
     />
 
     @foreach ($tags as $tag)
@@ -98,13 +90,7 @@
     @endforeach
 
     <div class="modal-action">
-      <button
-        type="submit"
-        class="btn btn-primary"
-        @click="dialogIsVisible = false"
-      >
-        Edit
-      </button>
+      <button type="submit" class="btn btn-primary">Edit</button>
     </div>
   </form>
 </dialog>

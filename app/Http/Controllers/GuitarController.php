@@ -7,7 +7,9 @@ use App\Models\Category;
 use App\Models\Guitar;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class GuitarController extends Controller
 {
@@ -42,9 +44,9 @@ class GuitarController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(GuitarRequest $request)
     {
-        $input = $request->all();
+        $input = $request->validated();
 
         $newGuitar = new Guitar();
         $newGuitar->name = $input['name'];
@@ -85,9 +87,41 @@ class GuitarController extends Controller
         ]);
     }
 
-    public function update(GuitarRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        $input = $request->validated();
+        try {
+            $input = $request->validate([
+                'name' => 'required|string',
+                'model' => 'required|string',
+                'category_id' => 'required|integer',
+                'description' => 'required|string|max:255',
+                'price' => 'required|decimal:0,2',
+                'tag' => 'sometimes|required|int'
+            ]);
+        } catch (ValidationException $e) {
+            if ($request->hasHeader('HX-Request')) {
+                $guitar = Guitar::with('category')->find($request['id']);
+                $categories = Category::all();
+                $tags = Tag::all();
+                $currentTags = $guitar->tags()->pluck('tags.id')->all();
+
+                return response()
+                    ->view('components.guitar-edit-form', [
+                        'guitar' => $guitar,
+                        'open' => true,
+                        'categories' => $categories,
+                        'tags' => $tags,
+                        'currentTags' => $currentTags,
+                        'errors' => collect($e->errors()),
+                    ])
+                    ->withHeaders([
+                        'HX-Retarget' => '#dialog',
+                    ]);
+            }
+
+            throw $e;
+        }
+
         $newGuitar = Guitar::query()->findOrFail($id);
 
         $newGuitar->name = $input['name'];
@@ -102,9 +136,9 @@ class GuitarController extends Controller
             $newGuitar->tags()->detach();
         }
 
-        $newGuitar->saveOrFail();
+        $newGuitar->saveOrfail();
 
-        if ($request->header('HX-Request')) {
+        if ($request->hasHeader('HX-Request')) {
             return view("components.guitar", [
                 'guitar' => $newGuitar,
                 'open' => true
@@ -114,9 +148,13 @@ class GuitarController extends Controller
         return redirect()->route('guitars.index');
     }
 
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         Guitar::destroy($id);
+        if ($request->header('HX-Request')) {
+            return redirect()->route('guitars.index');
+        }
+
         return response("", 201);
     }
 }
