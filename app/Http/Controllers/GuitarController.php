@@ -5,14 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Guitar;
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class GuitarController extends Controller
 {
     public function index(Request $request)
     {
-        $guitars = Guitar::with('category')->orderBy('created_at', 'desc')->paginate(10);
+        $request->flash();
+
+        $guitars = Guitar::query()
+            ->with('category')
+            ->where('name', 'like', "%{$request->input('query')}%")
+            ->when($request->input('category_id'), function (Builder $query, int $category_id) {
+                $query->where('category_id', $category_id);
+            })
+            ->when($request->input('tag_id'), function (Builder $query, int $tag_id) {
+                $query->whereRelation('tags', 'tags.id', $tag_id);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
         $categories = Category::all();
+        $tags = Tag::all();
 
         if ($request->header('HX-Request')) {
             return view('components.guitar-table', ['guitars' => $guitars]);
@@ -21,6 +37,7 @@ class GuitarController extends Controller
         return view('guitars.index', [
             'guitars' => $guitars,
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
