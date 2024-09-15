@@ -11,7 +11,9 @@
   <body>
     <x-navbar />
 
-    <main class="mx-auto max-w-6xl gap-4 p-4 md:grid md:grid-cols-6">
+    <main
+      class="mx-auto max-w-6xl grid-flow-row gap-4 p-4 md:grid md:grid-cols-6"
+    >
       {{ $slot }}
     </main>
   </body>

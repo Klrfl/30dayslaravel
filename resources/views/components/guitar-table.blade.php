@@ -1,5 +1,5 @@
 <div
-  class="col-span-6 overflow-auto pb-12 pt-4 md:col-span-4"
+  class="col-span-6 overflow-auto pb-12 pt-4 md:col-span-4 md:row-span-2"
   id="table-container"
 >
   <table
