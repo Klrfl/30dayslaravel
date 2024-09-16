@@ -6,9 +6,10 @@ use App\Http\Requests\GuitarRequest;
 use App\Models\Category;
 use App\Models\Guitar;
 use App\Models\Tag;
+use Illuminate\Validation\Rules\File;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class GuitarController extends Controller
@@ -92,6 +93,7 @@ class GuitarController extends Controller
         try {
             $input = $request->validate([
                 'name' => 'required|string',
+                'image' => 'sometimes|image',
                 'model' => 'required|string',
                 'category_id' => 'required|integer',
                 'description' => 'required|string|max:255',
@@ -124,6 +126,14 @@ class GuitarController extends Controller
         }
 
         $newGuitar = Guitar::query()->findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $oldImage = Guitar::find($request->id)->image;
+            Storage::delete($oldImage);
+
+            $path = $request->file('image')->storePublicly('guitars');
+            $newGuitar->image = $path;
+        }
 
         $newGuitar->name = $input['name'];
         $newGuitar->model = $input['model'];
