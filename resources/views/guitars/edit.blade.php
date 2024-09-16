@@ -19,57 +19,80 @@
     @csrf
     @method('PUT')
 
-    <input
-      class="input input-bordered"
-      type="text"
-      name="name"
-      value="{{ $guitar->name }}"
-      placeholder="name"
-      required
-    />
-    <input
-      class="input input-bordered"
-      type="text"
-      name="model"
-      value="{{ $guitar->model }}"
-      placeholder="model"
-      required
-    />
-    <select
-      name="category_id"
-      id="category"
-      class="select select-bordered"
-      required
-    >
-      <option value="" disabled selected>Pilih satu</option>
-      @foreach ($categories as $category)
-        @if ($category->id == $guitar->category->id)
-          <option value="{{ $category->id }}" selected>
-            {{ $category->name }}
-          </option>
-        @else
-          <option value="{{ $category->id }}">
-            {{ $category->name }}
-          </option>
-        @endif
-      @endforeach
-    </select>
-    <input
-      class="input input-bordered"
-      type="text"
-      name="description"
-      value="{{ $guitar->description }}"
-      placeholder="description"
-      required
-    />
-    <input
-      class="input input-bordered"
-      type="text"
-      name="price"
-      value="{{ $guitar->price }}"
-      placeholder="price"
-      required
-    />
+    <label for="name" class="label flex-wrap gap-4">
+      <span class="label-text basis-16">Nama</span>
+      <input
+        class="input flex-1 border-2 border-b-gray-700"
+        type="text"
+        name="name"
+        id="name"
+        value="{{ $guitar->name }}"
+        placeholder="name"
+      />
+    </label>
+
+    <label for="model" class="label flex-wrap gap-4">
+      <span class="label-text basis-16">Model</span>
+
+      <input
+        class="input flex-1 border-2 border-b-gray-700 transition-colors"
+        type="text"
+        name="model"
+        id="model"
+        value="{{ $guitar->model }}"
+        placeholder="model"
+        required
+      />
+    </label>
+
+    <label for="category" class="label flex-wrap justify-start gap-4">
+      <span class="label-text basis-16">Kategori</span>
+      <select
+        name="category_id"
+        id="category"
+        class="select border-2 border-b-gray-700"
+        required
+      >
+        <option value="" disabled selected>Pilih satu</option>
+        @foreach ($categories as $category)
+          @if ($category->id == $guitar->category->id)
+            <option value="{{ $category->id }}" selected>
+              {{ $category->name }}
+            </option>
+          @else
+            <option value="{{ $category->id }}">
+              {{ $category->name }}
+            </option>
+          @endif
+        @endforeach
+      </select>
+    </label>
+
+    <label for="description " class="label flex-wrap gap-4">
+      <span class="label-text basis-16">Deskripsi</span>
+
+      <input
+        class="input flex-1 border-2 border-b-gray-700"
+        type="text"
+        name="description"
+        value="{{ $guitar->description }}"
+        placeholder="description"
+        required
+      />
+    </label>
+
+    <label for="price" class="label flex-wrap gap-4">
+      <span class="label-text basis-16">Harga</span>
+
+      <input
+        class="input flex-1 border-2 border-b-gray-700"
+        type="text"
+        name="price"
+        value="{{ $guitar->price }}"
+        placeholder="price"
+        required
+      />
+    </label>
 
     @foreach ($tags as $tag)
       <span class="flex gap-2">
