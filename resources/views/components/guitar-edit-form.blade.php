@@ -30,7 +30,14 @@
       </button>
     </header>
 
-    {{ $errors }}
+    @if (sizeof($errors) != 0)
+      @foreach ($errors as $error)
+        <span class="block text-sm text-red-500">
+          {{ $error[0] }}
+        </span>
+      @endforeach
+    @endif
+
     <input
       class="input input-bordered"
       type="text"

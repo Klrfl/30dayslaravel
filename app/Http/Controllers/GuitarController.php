@@ -96,7 +96,8 @@ class GuitarController extends Controller
                 'category_id' => 'required|integer',
                 'description' => 'required|string|max:255',
                 'price' => 'required|decimal:0,2',
-                'tag' => 'sometimes|required|int'
+                'tag' => 'sometimes|required|array',
+                'tag.*' => 'integer',
             ]);
         } catch (ValidationException $e) {
             if ($request->hasHeader('HX-Request')) {
@@ -112,7 +113,7 @@ class GuitarController extends Controller
                         'categories' => $categories,
                         'tags' => $tags,
                         'currentTags' => $currentTags,
-                        'errors' => collect($e->errors()),
+                        'errors' => $e->errors(),
                     ])
                     ->withHeaders([
                         'HX-Retarget' => '#dialog',
