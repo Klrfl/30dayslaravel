@@ -113,7 +113,7 @@
       @endforeach
     </select>
 
-    <button class="btn btn-outline btn-primary ml-auto">Submit</button>
+    <button class="btn btn-outline btn-primary ml-auto">Cari gitar</button>
   </form>
 
   <x-guitar-table :guitars="$guitars" />
