@@ -5,20 +5,24 @@
   @else
       x-data="{ dialogIsVisible: false }"
   @endif
-  class="modal backdrop-blur-sm backdrop-brightness-50"
+  class="modal modal-bottom backdrop-blur-sm backdrop-brightness-50 sm:modal-middle"
   x-show="dialogIsVisible"
   x-dialog="dialogIsVisible = false"
   @click.self="dialogIsVisible = false"
   id="dialog"
 >
   <form
-    hx-put="{{ route("guitars.update", $guitar->id) }}"
-    class="dark:bg-base modal-box flex flex-col gap-2"
+    hx-post="{{ route("guitars.update", $guitar->id) }}"
+    hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
+    class="dark:bg-base form-control modal-box gap-2 md:grid md:min-w-[80ch] md:grid-cols-2"
     hx-target="#guitar-{{ $guitar->id }}"
     hx-swap="outerHTML"
+    enctype="multipart/form-data"
   >
-    @csrf
-    <header class="mb-6 flex items-center justify-between gap-4">
+    @method("PUT")
+    <header
+      class="mb-6 flex items-center justify-between gap-4 md:col-span-full"
+    >
       <h2>Edit gitar</h2>
 
       <button
@@ -31,12 +35,32 @@
     </header>
 
     @if (sizeof($errors) != 0)
-      @foreach ($errors as $error)
-        <span class="block text-sm text-red-500">
-          {{ $error[0] }}
-        </span>
-      @endforeach
+      <ul class="md:col-span-full">
+        @foreach ($errors as $error)
+          <li class="block text-sm text-red-500">
+            {{ $error[0] }}
+          </li>
+        @endforeach
+      </ul>
     @endif
+
+    <figure
+      class="flex flex-col gap-2 md:row-span-8"
+      x-data="{ previewUrl: '{{ asset("storage/" . $guitar->image) }}' }"
+    >
+      <img
+        :src="previewUrl"
+        alt=""
+        class="aspect-video h-64 w-full rounded-lg object-cover"
+      />
+      <input
+        type="file"
+        name="image"
+        id="image"
+        class="file-input file-input-bordered"
+        @change="previewUrl = URL.createObjectURL($event.target.files[0])"
+      />
+    </figure>
 
     <input
       class="input input-bordered"

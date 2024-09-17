@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('guitars', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image')->nullable();
             $table->string('model');
             $table->bigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
