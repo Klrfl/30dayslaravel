@@ -26,7 +26,7 @@
       <h2>Edit gitar</h2>
 
       <button
-        @click="dialogIsVisible = false"
+        @click="dialogIsVisible = false; history.back()"
         type="button"
         class="btn btn-outline btn-primary self-end"
       >
@@ -121,7 +121,13 @@
     @endforeach
 
     <div class="modal-action">
-      <button type="submit" class="btn btn-primary">Edit</button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        @click="dialog.close(); history.back()"
+      >
+        Edit
+      </button>
     </div>
   </form>
 </dialog>
