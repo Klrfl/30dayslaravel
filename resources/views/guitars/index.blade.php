@@ -69,7 +69,7 @@
   </form>
 
   <form
-    class="col-span-4 flex gap-2"
+    class="col-span-4 flex gap-2 rounded-lg bg-gray-700/20 p-4"
     hx-get="{{
       route('guitars.index', [
         'query' => request('query'),

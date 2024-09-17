@@ -1,5 +1,5 @@
 <div
-  class="col-span-6 overflow-auto pb-12 pt-4 md:col-span-4 md:row-span-2"
+  class="col-span-6 flex flex-col overflow-auto rounded-lg bg-gray-700/20 p-4 md:col-span-4 md:row-span-2"
   id="table-container"
 >
   <table
@@ -30,7 +30,12 @@
     </tbody>
   </table>
 
-  <div class="py-4" hx-boost="true" hx-target="#table-container">
+  <nav
+    class="mt-auto py-4"
+    hx-boost="true"
+    hx-target="#table-container"
+    hx-swap="outerHTML"
+  >
     {{ $guitars->links('vendor.pagination.tailwind') }}
-  </div>
+  </nav>
 </div>
