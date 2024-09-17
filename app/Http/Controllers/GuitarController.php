@@ -103,7 +103,7 @@ class GuitarController extends Controller
             ]);
         } catch (ValidationException $e) {
             if ($request->hasHeader('HX-Request')) {
-                $guitar = Guitar::with('category')->find($request['id']);
+                $guitar = Guitar::with('category')->find($id);
                 $categories = Category::all();
                 $tags = Tag::all();
                 $currentTags = $guitar->tags()->pluck('tags.id')->all();
@@ -129,9 +129,11 @@ class GuitarController extends Controller
 
         if ($request->hasFile('image')) {
             $oldImage = Guitar::find($request->id)->image;
-            Storage::delete($oldImage);
+            if ($oldImage != '') {
+                Storage::delete($oldImage);
+            }
 
-            $path = $request->file('image')->storePublicly('guitars');
+            $path = Storage::disk('public')->put('guitars', $request->file('image'));
             $newGuitar->image = $path;
         }
 
