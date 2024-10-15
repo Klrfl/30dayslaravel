@@ -107,7 +107,11 @@
   @endforeach
 
   <div class="modal-action">
-    <button type="submit" class="btn btn-primary" @click="dialog.close()">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      @click="dialogIsVisible = false"
+    >
       Edit
     </button>
   </div>
