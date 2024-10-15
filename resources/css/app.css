@@ -19,4 +19,8 @@
   .htmx-added {
     opacity: 1;
   }
+
+  #dialog-form.htmx-swapping {
+    opacity: 1;
+  }
 }
