@@ -12,7 +12,7 @@ class GuitarEditForm extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public Guitar $guitar, public bool $open)
+    public function __construct(public Guitar $guitar)
     {
         //
     }

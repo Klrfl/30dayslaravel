@@ -6,7 +6,6 @@ use App\Http\Requests\GuitarRequest;
 use App\Models\Category;
 use App\Models\Guitar;
 use App\Models\Tag;
-use Illuminate\Validation\Rules\File;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -71,7 +70,6 @@ class GuitarController extends Controller
         if ($request->hasHeader('HX-Request')) {
             return view("components.guitar-edit-form", [
                 'guitar' => $guitar,
-                'open' => true,
                 'categories' => $categories,
                 'tags' => $tags,
                 'currentTags' => $currentTags,
