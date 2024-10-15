@@ -15,11 +15,10 @@
     <a
       href="{{ route('guitars.edit', $guitar->id) }}"
       hx-get="{{ route('guitars.edit', $guitar->id) }}"
-      hx-push-url="true"
       class="btn btn-sm ring-1 ring-primary"
       @click="dialogIsVisible = true"
-      hx-target="#dialog"
-      hx-swap="outerHTML"
+      hx-target="#dialog-form"
+      hx-select="#dialog-form"
     >
       Edit
     </a>

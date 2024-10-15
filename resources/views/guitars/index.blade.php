@@ -119,5 +119,13 @@
   <x-guitar-table :guitars="$guitars" />
 
   <!-- this element is for the initial swap -->
-  <div id="dialog"></div>
+  <dialog
+    class="modal modal-bottom backdrop-blur-sm backdrop-brightness-50 sm:modal-middle"
+    x-show="dialogIsVisible"
+    x-htmldialog="dialogIsVisible = false"
+    @click.self="dialogIsVisible = false"
+    id="dialog"
+  >
+    <form action="" id="dialog-form"></form>
+  </dialog>
 </x-layout>

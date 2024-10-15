@@ -1,32 +1,27 @@
 <dialog
-  @if ($open)
-      x-data="{ dialogIsVisible: true }"
-      open
-  @else
-      x-data="{ dialogIsVisible: false }"
-  @endif
   class="modal modal-bottom backdrop-blur-sm backdrop-brightness-50 sm:modal-middle"
   x-show="dialogIsVisible"
-  x-dialog="dialogIsVisible = false"
+  x-htmldialog="dialogIsVisible = false"
   @click.self="dialogIsVisible = false"
   id="dialog"
 >
   <form
-    hx-post="{{ route("guitars.update", $guitar->id) }}"
+    hx-post="{{ route('guitars.update', $guitar->id) }}"
     hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
     class="dark:bg-base form-control modal-box gap-2 md:grid md:min-w-[80ch] md:grid-cols-2"
     hx-target="#guitar-{{ $guitar->id }}"
     hx-swap="outerHTML"
     enctype="multipart/form-data"
+    id="dialog-form"
   >
-    @method("PUT")
+    @method('PUT')
     <header
       class="mb-6 flex items-center justify-between gap-4 md:col-span-full"
     >
       <h2>Edit gitar</h2>
 
       <button
-        @click="dialogIsVisible = false; history.back()"
+        @click="dialogIsVisible = false"
         type="button"
         class="btn btn-outline btn-primary self-end"
       >
@@ -46,7 +41,7 @@
 
     <figure
       class="flex flex-col gap-2 md:row-span-8"
-      x-data="{ previewUrl: '{{ asset("storage/" . $guitar->image) }}' }"
+      x-data="{ previewUrl: '{{ asset('storage/' . $guitar->image) }}' }"
     >
       <img
         :src="previewUrl"
@@ -121,11 +116,7 @@
     @endforeach
 
     <div class="modal-action">
-      <button
-        type="submit"
-        class="btn btn-primary"
-        @click="dialog.close(); history.back()"
-      >
+      <button type="submit" class="btn btn-primary" @click="dialog.close()">
         Edit
       </button>
     </div>
