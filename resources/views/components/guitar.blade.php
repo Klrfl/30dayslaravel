@@ -18,7 +18,7 @@
       class="btn btn-sm ring-1 ring-primary"
       @click="dialogIsVisible = true"
       hx-target="#dialog-form"
-      hx-select="#dialog-form"
+      hx-swap="outerHTML"
     >
       Edit
     </a>
